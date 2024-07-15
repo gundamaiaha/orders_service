@@ -1,0 +1,9 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+   url: jdbc:h2:mem:orders_db
+
+server:
+  port: 8899

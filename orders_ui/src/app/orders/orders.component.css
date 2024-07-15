@@ -1,0 +1,30 @@
+.flex-container {
+  display: flex;
+  gap: 30px; /* Add space between items if needed */
+}
+
+.custom-primary-button {
+  background-color: white; /* Custom primary color */
+  color: rgb(13, 0, 128); /* Text color */
+  border: 1px solid; /* Optional: Add a border */
+  padding-left: 10px;
+  margin-left: 10px;/* Optional: Adjust padding */
+  border-radius: 4px; /* Optional: Add border radius */
+}
+
+.failure-orders-button-style {
+  background-color: white; /* Custom primary color */
+  color: rgb(209, 26, 26); /* Text color */
+  border: 1px solid; /* Optional: Add a border */
+  padding-left: 10px;
+  margin-left: 10px;/* Optional: Adjust padding */
+  border-radius: 4px; /* Optional: Add border radius */
+}
+
+
+Button {
+  margin: 5px;
+}
+
+
+

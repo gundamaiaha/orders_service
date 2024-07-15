@@ -1,0 +1,71 @@
+<mat-card appearance="raised" class="flex-container">
+  <mat-card-header>
+    <mat-card-title> Orders Search1</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-button-toggle-group aria-label="Font Style" [(ngModel)]="searchType">
+      <mat-button-toggle value="default">Default</mat-button-toggle>
+      <mat-button-toggle value="searchWithDate"
+        >Search With Date</mat-button-toggle
+      >
+      <mat-button-toggle value="searchWithDateAndTimes"
+        >Search With start & end times</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="fetchSuccessOrders()"
+      style="margin-bottom: 5px; font-weight: bold"
+    >
+      Success Orders
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="fetchFailedOrders()"
+      style="margin-bottom: 5px; font-weight: bold"
+    >
+      Failure Orders
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="onExport()"
+      style="margin-bottom: 5px; font-weight: bold"
+    >
+      Export Orders Data
+    </button>
+  </mat-card-content>
+
+  <mat-card-content>
+    <div class="flex-container">
+      <div *ngIf="searchType === 'searchWithDate'">
+        <mat-form-field>
+          <mat-label>Select Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dp3"
+            [(ngModel)]="searchDate"
+            (ngModelChange)="onDateChange($event)"
+          />
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<div style="height: 600px; box-sizing: border-box">
+  <ag-grid-angular
+    class="ag-theme-quartz"
+    style="height: 500px"
+    [rowData]="rowData"
+    [columnDefs]="colDefs"
+    [pagination]="true"
+    [paginationAutoPageSize]="true"
+    [defaultColDef]="defaultColDef"
+    (gridReady)="onGridReady($event)"
+  />
+</div>

@@ -1,0 +1,15 @@
+.header-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.header-title {
+  margin-left: 16px;
+  font-size: 24px;
+  font-weight: bold;
+}
