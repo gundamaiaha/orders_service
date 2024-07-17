@@ -5,6 +5,7 @@ import com.example.orders.dto.OrderSearchCriteria;
 import com.example.orders.model.Order;
 import com.example.orders.repository.OrdersRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrdersService {
@@ -21,6 +23,7 @@ public class OrdersService {
 
 
     public List<Order> searchSuccessOrders(OrderSearchCriteria orderSearchCriteria) {
+       log.info("in searchSuccessOrders ");
         return searchOrders(orderSearchCriteria, OrderStatus.SUCCESS);
     }
 
@@ -30,7 +33,7 @@ public class OrdersService {
 
 
     private List<Order> searchOrders(OrderSearchCriteria orderSearchCriteria, OrderStatus orderStatus) {
-
+        log.info("in searchOrders");
         LocalDateTime startDateTime = Optional.ofNullable(orderSearchCriteria).map(OrderSearchCriteria::getStartDateTime).orElse(null);
         LocalDateTime endDateTime = Optional.ofNullable(orderSearchCriteria).map(OrderSearchCriteria::getEndDateTime).orElse(null);
         LocalDate searchDate = Optional.ofNullable(orderSearchCriteria).map(OrderSearchCriteria::getSearchDate).orElse(null);
@@ -53,6 +56,7 @@ public class OrdersService {
     }
 
     public List<Order> getAllOrders(){
+        log.info("getting all orders");
         return ordersRepository.findAll();
     }
 

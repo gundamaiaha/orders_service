@@ -5,10 +5,13 @@ import com.example.orders.model.Order;
 import com.example.orders.repository.OrdersRepository;
 import com.example.orders.service.OrdersService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +23,7 @@ public class OrdersController {
 
     @PostMapping("/success")
     public List<Order> getSuccessOrders(@RequestBody(required = false) OrderSearchCriteria orderSearchCriteria) {
+        //MDC.put("orderSearchCriteria", orderSearchCriteria.toString());
         return ordersService.searchSuccessOrders(orderSearchCriteria);
     }
     @PostMapping("/failed")
@@ -29,6 +33,7 @@ public class OrdersController {
 
     @GetMapping("/all")
     public List<Order> getAll(){
+        MDC.put("allOrderSearch", "true");
         return ordersService.getAllOrders();
     }
 

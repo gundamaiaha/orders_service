@@ -18,7 +18,7 @@
       (click)="fetchSuccessOrders()"
       style="margin-bottom: 5px; font-weight: bold"
     >
-      Success Orders
+      Search
     </button>
     <button
       mat-raised-button
@@ -53,6 +53,77 @@
           <mat-datepicker #dp3></mat-datepicker>
         </mat-form-field>
       </div>
+      <div *ngIf="searchType === 'searchWithDateAndTimes'">
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date and Time</mat-label>
+          <input
+            matInput
+            [matDatetimepicker]="startPicker"
+            placeholder="MM/DD/YYYY, HH:MM"
+            [(ngModel)]="startDateTime"
+          />
+          <mat-datetimepicker-toggle
+            matSuffix
+            [for]="startPicker"
+          ></mat-datetimepicker-toggle>
+          <mat-datetimepicker #startPicker type="datetime"></mat-datetimepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>End Date and Time</mat-label>
+          <input
+            matInput
+            [matDatetimepicker]="endPicker"
+            placeholder="MM/DD/YYYY, HH:MM"
+            [(ngModel)]="endDateTime"
+          />
+          <mat-datetimepicker-toggle
+            matSuffix
+            [for]="endPicker"
+          ></mat-datetimepicker-toggle>
+          <mat-datetimepicker #endPicker type="datetime"></mat-datetimepicker>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="outline">
+          <mat-label>Select Start Time</mat-label>
+          <input
+            matInput
+            [matDatetimepicker]="startTIme"
+            placeholder="MM/DD/YYYY, HH:MM"
+            [(ngModel)]="startDateTime"
+          />
+          <mat-datetimepicker-toggle
+            matSuffix
+            [for]="startTIme"
+          ></mat-datetimepicker-toggle>
+          <mat-datetimepicker #startTIme type="datetime"></mat-datetimepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Select End Time</mat-label>
+          <input
+            matInput
+            [matDatetimepicker]="endTime"
+            placeholder="MM/DD/YYYY, HH:MM"
+            [(ngModel)]="endDateTime"
+          />
+          <mat-datetimepicker-toggle
+            matSuffix
+            [for]="endTime"
+          ></mat-datetimepicker-toggle>
+          <mat-datetimepicker #endTime type="datetime"></mat-datetimepicker>
+        </mat-form-field> -->
+      </div>
+
+      <!-- <mat-form-field appearance="fill">
+        <mat-label>Start Time</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <input matInput class="time-picker" type="time" id="appt" name="appt" />
+
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>today</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> -->
     </div>
   </mat-card-content>
 </mat-card>

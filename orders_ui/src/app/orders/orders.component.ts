@@ -11,7 +11,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-
+import {
+  MatDatetimepickerModule,
+  MatNativeDatetimeModule,
+} from '@mat-datetimepicker/core';
+import moment from 'moment';
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'yyyy-MM-dd',
@@ -38,6 +42,8 @@ export const MY_DATE_FORMATS = {
     CommonModule,
     MatNativeDateModule,
     MatInputModule,
+    MatDatetimepickerModule,
+    MatNativeDatetimeModule,
   ],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
@@ -65,7 +71,8 @@ export class OrdersComponent implements OnInit {
   pagination: boolean = true;
   paginationPageSize: number = 10;
   paginationPageSizeSelector: boolean | number[] = [10, 100, 300];
-
+  startDateTime: Date | null = null;
+  endDateTime: Date | null = null;
   defaultColDef = {
     flex: 1,
     minWidth: 100,
@@ -89,8 +96,13 @@ export class OrdersComponent implements OnInit {
       this.searchDate = null;
     }
   }
+  formatDateTime(date: Date | null): string | null {
+    return date ? moment(date).format('YYYY-MM-DDTHH:mm:ss') : null;
+  }
 
   fetchSuccessOrders() {
+    console.log('start Time -->' + this.formatDateTime(this.startDateTime));
+    console.log('end time -->' + this.formatDateTime(this.endDateTime));
     const searchCriteria = this.buildSearchCriteria();
     this.ordersService
       .getSuccessOrders(searchCriteria)
@@ -117,6 +129,12 @@ export class OrdersComponent implements OnInit {
 
     if (this.searchType && this.searchType === 'searchWithDate') {
       searchCriteria.searchDate = this.searchDate;
+    } else if (
+      this.searchType &&
+      this.searchType === 'searchWithDateAndTimes'
+    ) {
+      searchCriteria.startDateTime = this.formatDateTime(this.startDateTime);
+      searchCriteria.endDateTime = this.formatDateTime(this.endDateTime);
     }
 
     return searchCriteria;
